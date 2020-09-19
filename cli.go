@@ -49,6 +49,20 @@ func (c CLI) SplitStringToInts(cols string, delim string) []int {
 }
 
 /*
+SplitStringToFloats splits the cols string based on the delimiter, converting the results in an []float64
+*/
+func (c CLI) SplitStringToFloats(cols string, delim string) []float64 {
+	columns := strings.Split(cols, delim)
+	result := make([]float64, len(columns))
+	for index := 0; index < len(columns); index++ {
+		strValue := columns[index]
+		intValue, _ := strconv.ParseFloat(strValue, 64)
+		result[index] = intValue
+	}
+	return result
+}
+
+/*
 GetStringOrDie requires the key exist in the CLI arguments or os.Exit(1)
 */
 func (c CLI) GetStringOrDie(key string) string {
