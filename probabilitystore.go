@@ -16,7 +16,6 @@ type Bin struct {
 type ProbabilityStore struct {
 	Bins []*Bin
 	CallCount int
-	Misses int
 }
 
 // Debug prints the results to stdout
@@ -31,7 +30,6 @@ func (bins ProbabilityStore) Debug (totalRows int) {
 			index, bin.Probability, bin.LowerBound, bin.UpperBound, bin.Count, binPct, difference)
 	}
 	fmt.Printf("BS.CallCount %d\n", bins.CallCount)
-	fmt.Printf("BS.MissCount %d\n", bins.Misses)
 	fmt.Println("")
 }
 
@@ -71,7 +69,6 @@ func (b *ProbabilityStore) BinarySearch(value float64, bins []*Bin) int {
 		return b.BinarySearch(value, searchSpace)
 	} else {
 		// we don't have it
-		b.Misses += 1
 		return -1
 	}
 
@@ -104,6 +101,6 @@ func NewProbabilityStore(values[] float64) *ProbabilityStore {
 		bin := Bin{lastBin.Index+1, remainder, 0, lastBin.UpperBound, 100.0}
 		bins = append(bins, &bin)
 	}
-	bs := ProbabilityStore{bins, 0, 0}
+	bs := ProbabilityStore{bins, 0}
 	return &bs
 }
