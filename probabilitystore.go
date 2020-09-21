@@ -14,7 +14,7 @@ type Bin struct {
 }
 
 type ProbabilityStore struct {
-	bins []*Bin
+	Bins []*Bin
 	CallCount int
 	Misses int
 }
@@ -24,7 +24,7 @@ func (bins ProbabilityStore) Debug (totalRows int) {
 	fmt.Println("")
 	pct := float64(100) / float64(totalRows)
 	for index := 0; index < bins.Length(); index++ {
-		bin := bins.bins[index]
+		bin := bins.Bins[index]
 		binPct := pct * float64(bin.Count)
 		difference := bin.Probability - binPct
 		fmt.Printf("Bin[%d] requested %.2f pct, (lower %.2f/upper %.2f), received %d hits, achieved %.3f pct, difference %.3f pct\n", 
@@ -37,13 +37,13 @@ func (bins ProbabilityStore) Debug (totalRows int) {
 
 
 func (b ProbabilityStore) Length () int {
-	return len(b.bins)
+	return len(b.Bins)
 }
 
 // IndexOf return the position in the array of the Bin that 
 // serves the value or -1 if it does not exist
 func (b *ProbabilityStore) Indexof (value float64) int {
-	index := b.BinarySearch(value, b.bins)
+	index := b.BinarySearch(value, b.Bins)
 	return index
 }
 
