@@ -76,6 +76,47 @@ func (store *ProbabilityStore) BinarySearch(value float64, bins []*Bin) int {
 
 }
 
+// Search_on performs a search in o(n) time to find the appropriate bin for the passed value
+func (store *ProbabilityStore) Search_on(value float64) int {
+	for index := 0; index < len(store.Bins); index++ {
+		store.CallCount++
+		candidate := store.Bins[index]
+		if candidate.UpperBound > value && candidate.LowerBound < value { // eq
+			// this is it
+			return candidate.Index
+		}
+	}
+	// we don't have it
+	return -1
+}
+
+// Search_o_log_n performs a search in o(n) time to find the appropriate bin for the passed value
+func (store *ProbabilityStore) Search_o_log_n(value float64) int {
+
+	lindex := 0
+	rindex := len(store.Bins)
+
+	for loop := 0; loop < len(store.Bins)/2; loop++ {
+		store.CallCount++
+
+		middle := lindex + ((rindex - lindex) / 2)
+		entry := store.Bins[middle]
+		if entry.LowerBound > value {
+			// chop all from right
+			rindex = middle
+		} else if entry.UpperBound < value {
+			// chop all from left
+			lindex = middle
+		} else if entry.UpperBound > value && entry.LowerBound < value {
+			// this is it
+			return entry.Index
+		}
+
+	}
+	return -1
+
+}
+
 // NewProbabilityStore factory function creates a store and allocates the Bins against teh array of probabilities
 func NewProbabilityStore(values []float64) *ProbabilityStore {
 	bins := make([]*Bin, len(values))

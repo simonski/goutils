@@ -74,7 +74,7 @@ func TestAllocationWorks(t *testing.T) {
 
 }
 
-func TestPerformanceWorstCase(t *testing.T) {
+func TestPerformance_ologn_WorstCase(t *testing.T) {
 	line1 := "1,2,3,4,5,6,7,8,9"
 	store := createProbabilityStore(line1)
 	fmt.Printf("There are %d bins when the line is %s\n", store.Length(), line1)
@@ -84,6 +84,23 @@ func TestPerformanceWorstCase(t *testing.T) {
 
 	// ok the search folds right, so just allocate to the minimum value
 	actual := store.Indexof(0.1)
+	expect := 0
+	if actual != expect {
+		t.Errorf("Bin allocation is incorrect (expect %d got %d).\n", expect, actual)
+	}
+
+	expect = 4
+	if store.CallCount != expect {
+		t.Errorf("Performance is incorrect (should be o log n)")
+	}
+}
+
+func TestPerformance_ologn_v2_WorstCase(t *testing.T) {
+	line1 := "1,2,3,4,5,6,7,8,9,10"
+	store := createProbabilityStore(line1)
+
+	// ok the search folds right, so just allocate to the minimum value
+	actual := store.Search_o_log_n(0.1)
 	expect := 0
 	if actual != expect {
 		t.Errorf("Bin allocation is incorrect (expect %d got %d).\n", expect, actual)
