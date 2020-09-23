@@ -1,6 +1,7 @@
 package goutils
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -13,8 +14,9 @@ func createCLI(line string) *CLI {
 
 func TestConstructor(t *testing.T) {
 	c := createCLI("run -file fred.txt c d -e 'hello'")
+	fmt.Printf("CLI contains %d\n", c.GetIntOrDefault("-fooo", 4))
 
-	t.Errorf("Something %d %q", len(c.Args), c.Args)
+	// t.Errorf("Something %d %q", len(c.Args), c.Args)
 }
 
 // func TestIndexOf(t *testing.T) {
