@@ -27,7 +27,7 @@ func (store ProbabilityStore) Debug(totalRows int) {
 		bin := store.Bins[index]
 		binPct := pct * float64(bin.Count)
 		difference := bin.Probability - binPct
-		fmt.Printf("Bin[%d] requested %.2f pct, (lower %.2f/upper %.2f), received %d hits, achieved %.3f pct, difference %.3f pct\n",
+		fmt.Printf("Bin[%d] requested %.5f pct, (lower %.5f/upper %.5f), received %d hits, achieved %.5f pct, difference %.5f pct\n",
 			index, bin.Probability, bin.LowerBound, bin.UpperBound, bin.Count, binPct, difference)
 	}
 	fmt.Printf("store.CallCount %d\n", store.CallCount)
