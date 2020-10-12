@@ -117,12 +117,15 @@ func (store *ProbabilityStore) Search_o_log_n(value float64) int {
 
 }
 
-// NewProbabilityStore factory function creates a store and allocates the Bins against teh array of probabilities
+// NewProbabilityStore factory function creates a store and allocates the Bins against 
+// the array of probabilities
 func NewProbabilityStore(values []float64) *ProbabilityStore {
 	bins := make([]*Bin, len(values))
 	lower := 0.0
 	upper := 0.0
 	remainder := float64(100)
+	// for each value, stack them on top
+	// of each other
 	for index := 0; index < len(values); index++ {
 		probability := values[index]
 		lower = upper
@@ -139,6 +142,8 @@ func NewProbabilityStore(values []float64) *ProbabilityStore {
 		bins[index] = &bin
 		remainder -= probability
 	}
+
+	// finally if there is anything left, make a final catch-all Bin
 	if remainder > 0 {
 		lastBin := bins[len(bins)-1]
 		bin := Bin{lastBin.Index + 1, remainder, 0, lastBin.UpperBound, 100.0}

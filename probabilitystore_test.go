@@ -111,3 +111,20 @@ func TestPerformance_ologn_v2_WorstCase(t *testing.T) {
 		t.Errorf("Performance is incorrect (should be o log n)")
 	}
 }
+
+
+// run some performance tests on varying N sizes and iteration sizes then determine the callcounts to verify
+// we are in o(n) and o(log n) 
+func TestPerformance(t *testing.T) {
+
+	nlow := 100
+	nhigh := 1000000
+	nincrement := 1000
+	iterations := 10000000
+
+	for n:=nlow; n<=nhigh; n+=nincrement {
+		report_on := RunPerformanceTest_on(n, iterations)
+		report_ologn := RunPerformanceTest_ologn(n, iterations)
+	}
+
+}
