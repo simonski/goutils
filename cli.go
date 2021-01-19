@@ -18,7 +18,7 @@ type CLI struct {
 NewCLI create instance of a cli
 */
 func NewCLI(args []string) *CLI {
-	r := CLI{args}
+	r := CLI{Args: args}
 	return &r
 }
 
