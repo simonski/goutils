@@ -22,6 +22,14 @@ func NewCLI(args []string) *CLI {
 	return &r
 }
 
+func (c *CLI) GetCommand() string {
+	if len(c.Args) > 1 {
+		return c.Args[1]
+	} else {
+		return ""
+	}
+}
+
 /*
 IndexOf find the position (or -1 if not present) in the args
 */
