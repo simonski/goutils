@@ -162,3 +162,15 @@ func ReverseString(s string) string {
 	}
 	return string(runes)
 }
+
+// FileExists indicates if a file already exists... or not
+func FileExists(filename string) bool {
+	if _, err := os.Stat(filename); err == nil {
+		return true
+	} else if os.IsNotExist(err) {
+		return false
+	} else {
+		// makes no sense but..
+		return false
+	}
+}
