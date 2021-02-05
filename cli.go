@@ -189,3 +189,13 @@ func (c CLI) FileExists(filename string) bool {
 	}
 	return !result.IsDir()
 }
+
+// GetEnvOrDefault returns an os.Getenv value or the defaultValue
+func GetEnvOrDefault(key string, defaultValue string) string {
+	value := os.Getenv(key)
+	if value != "" {
+		return value
+	} else {
+		return defaultValue
+	}
+}
