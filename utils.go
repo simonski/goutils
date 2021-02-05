@@ -174,3 +174,10 @@ func FileExists(filename string) bool {
 		return false
 	}
 }
+
+// EvaluateFilename replaces ~ with os.Getenv("HOME") on the filename
+func EvaluateFilename(filename string) string {
+	home := os.Getenv("HOME")
+	newname := strings.ReplaceAll(filename, "~", home)
+	return newname
+}
