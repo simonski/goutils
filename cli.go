@@ -145,9 +145,14 @@ func (c CLI) GetIntOrDefault(key string, defaultValue int) int {
 GetFileExistsOrDie returns the name of the file provided if it exists or failes and os.Exit(1)
 */
 func (c CLI) GetFileExistsOrDie(key string) string {
+	message := fmt.Sprintf("Fatal: '%s' does not have a value.\n", key)
+	return c.GetFileExistsOrDieWithMessage(key, message)
+}
+
+func (c CLI) GetFileExistsOrDieWithMessage(key string, message string) string {
 	filename := c.GetStringOrDie(key)
 	if filename == "" {
-		fmt.Printf("Fatal: '%s' does not have a value.\n", key)
+		fmt.Printf(message)
 		os.Exit(1)
 		return ""
 	}
