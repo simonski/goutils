@@ -1,6 +1,9 @@
 package goutils
 
 import (
+	"runtime"
+	"strings"
+
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/host"
@@ -14,6 +17,18 @@ type SysInfo struct {
 	CPU      string `bson:cpu`
 	RAM      uint64 `bson:ram`
 	Disk     uint64 `bson:disk`
+}
+
+func (*SysInfo) IsLinux() bool {
+	return strings.ToLower(runtime.GOOS) == "linux"
+}
+
+func (*SysInfo) IsWindows() bool {
+	return strings.ToLower(runtime.GOOS) == "windows"
+}
+
+func (*SysInfo) IsMacOS() bool {
+	return strings.ToLower(runtime.GOOS) == "darwin"
 }
 
 func NewSysInfo() *SysInfo {
