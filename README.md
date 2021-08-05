@@ -8,7 +8,7 @@ Package of go stuff I will iterate on
 
 ## building
 
-    go build
+    make 
 
 ## running
 
