@@ -112,9 +112,8 @@ func TestPerformance_ologn_v2_WorstCase(t *testing.T) {
 	}
 }
 
-
 // run some performance tests on varying N sizes and iteration sizes then determine the callcounts to verify
-// we are in o(n) and o(log n) 
+// we are in o(n) and o(log n)
 /*
 func TestPerformance(t *testing.T) {
 

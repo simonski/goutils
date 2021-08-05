@@ -117,7 +117,7 @@ func (store *ProbabilityStore) Search_o_log_n(value float64) int {
 
 }
 
-// NewProbabilityStore factory function creates a store and allocates the Bins against 
+// NewProbabilityStore factory function creates a store and allocates the Bins against
 // the array of probabilities
 func NewProbabilityStore(values []float64) *ProbabilityStore {
 	bins := make([]*Bin, len(values))
