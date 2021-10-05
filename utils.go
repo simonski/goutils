@@ -200,3 +200,13 @@ func Bitwisenot(value int) int {
 	// fmt.Printf("bitwisenot: ^%v=%v\n", value, result)
 	return result
 }
+
+func Repeatstring(s string, times int) string {
+	out := s
+	for index := 0; index < times; index++ {
+		out += s
+	}
+	return out
+}
+
+
