@@ -182,12 +182,12 @@ func EvaluateFilename(filename string) string {
 	return newname
 }
 
-func intify(value string) int {
+func Intify(value string) int {
 	ival, _ := strconv.Atoi(strings.TrimSpace(value))
 	return ival
 }
 
-func isint(value string) bool {
+func Isint(value string) bool {
 	_, err := strconv.Atoi(value)
 	if err != nil {
 		return false
@@ -195,7 +195,7 @@ func isint(value string) bool {
 	return true
 }
 
-func bitwisenot(value int) int {
+func Bitwisenot(value int) int {
 	result := (1 << 16) - 1 - value
 	// fmt.Printf("bitwisenot: ^%v=%v\n", value, result)
 	return result
