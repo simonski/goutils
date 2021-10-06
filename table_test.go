@@ -15,6 +15,5 @@ func TestTable(test *testing.T) {
 	t.Add(&Column{Position: 0, Title: "Jim", WidthPercent: 20})
 	t.Add(&Column{Position: 0, Title: "Rob", WidthPercent: 10})
 	t.Add(&Column{Position: 0, Title: "Finbar", WidthPercent: 10})
-	fmt.Printf("%v\n", t.Header())
-
+	// fmt.Printf("%v\n", t.Header())
 }

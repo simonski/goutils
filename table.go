@@ -2,7 +2,6 @@ package goutils
 
 import (
 	"strings"
-
 )
 
 type Align int
