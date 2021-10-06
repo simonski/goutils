@@ -1,9 +1,8 @@
-package table
+package goutils
 
 import (
 	"strings"
 
-	goutils "github.com/simonski/goutils"
 )
 
 type Align int
@@ -23,7 +22,7 @@ type Column struct {
 }
 
 func (column *Column) Width() int {
-	t := goutils.NewTerminal()
+	t := NewTerminal()
 	return t.Width() / 100 * column.WidthPercent
 }
 
@@ -45,7 +44,7 @@ func (table *Table) Add(column *Column) {
 }
 
 func (table *Table) Line() string {
-	t := goutils.NewTerminal()
+	t := NewTerminal()
 
 	// if border
 	// 	|col|col|col|col|col|

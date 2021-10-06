@@ -1,4 +1,4 @@
-package table
+package goutils
 
 import (
 	"fmt"
