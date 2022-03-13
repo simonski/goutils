@@ -83,7 +83,11 @@ func (c CLI) GetStringOrDie(key string) string {
 		if index+1 < len(c.Args) {
 			testValue := c.Args[index+1]
 			if testValue[0:1] == "-" {
-				// then there is no value
+				// Then there is no value - the key is specified without a value.
+				// In this case if the user wants to know if a key ahs been
+				// reuqested tehy would call .ContainsKey or .IndexOf
+				fmt.Printf("Fatal: '%s' requires a value.\n", key)
+				os.Exit(1)
 				return ""
 			}
 			return testValue
@@ -152,7 +156,7 @@ func (c CLI) GetFileExistsOrDie(key string) string {
 func (c CLI) GetFileExistsOrDieWithMessage(key string, message string) string {
 	filename := c.GetStringOrDie(key)
 	if filename == "" {
-		fmt.Printf(message)
+		fmt.Println(message)
 		os.Exit(1)
 		return ""
 	}
