@@ -2,6 +2,9 @@ package goutils
 
 import (
 	"strings"
+	"syscall"
+
+	terminal "golang.org/x/term"
 )
 
 type Align int
@@ -21,8 +24,10 @@ type Column struct {
 }
 
 func (column *Column) Width() int {
-	t := NewTerminal()
-	return t.Width() / 100 * column.WidthPercent
+	_, w, _ := terminal.GetSize(int(syscall.Stdin))
+	return w / 100 * column.WidthPercent
+	// t := NewTerminal()
+	// return t.Width() / 100 * column.WidthPercent
 }
 
 type Table struct {
@@ -43,7 +48,7 @@ func (table *Table) Add(column *Column) {
 }
 
 func (table *Table) Line() string {
-	t := NewTerminal()
+	// t := NewTerminal()
 
 	// if border
 	// 	|col|col|col|col|col|
@@ -52,7 +57,10 @@ func (table *Table) Line() string {
 	// 	col|col|col|col|col
 	// 	So a 5-col table has 5-1 column separators adding to width
 
-	line := strings.Repeat(table.SeparatorLine, t.Width())
+	_, width, _ := terminal.GetSize(int(syscall.Stdin))
+	// return w / 100 * column.WidthPercent
+
+	line := strings.Repeat(table.SeparatorLine, width)
 	return line
 }
 
