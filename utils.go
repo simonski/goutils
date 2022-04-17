@@ -13,6 +13,13 @@ import (
 	"strings"
 )
 
+func CheckErr(err error) {
+	if err != nil {
+		fmt.Printf("Error: %v\n", err.Error())
+		panic(err)
+	}
+}
+
 type FileScanner struct {
 	io.Closer
 	*bufio.Scanner
