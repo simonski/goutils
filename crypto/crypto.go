@@ -25,6 +25,7 @@ import (
 	"io/ioutil"
 
 	goutils "github.com/simonski/goutils"
+	"golang.org/x/crypto/bcrypt"
 
 	"crypto/rand"
 	"crypto/sha512"
@@ -34,6 +35,23 @@ import (
 	"log"
 	"os"
 )
+
+func CheckErr(err error) {
+	if err != nil {
+		fmt.Printf("Error: %v\n", err.Error())
+		panic(err)
+	}
+}
+
+func BCryptHash(plaintext string, rounds int) string {
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(plaintext), rounds)
+	return string(bytes)
+}
+
+func BCryptCheck(plaintext string, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(plaintext))
+	return err == nil
+}
 
 func Encrypt(value string, privateKeyFilename string) (string, error) {
 	return EncryptWithPrivateKeyFilename(value, privateKeyFilename)
