@@ -76,7 +76,7 @@ func Decrypt(value string, privateKeyFilename string) (string, error) {
 
 // DoVerify performs verification of ~/.KPfile, encryption/decryption using
 // specified keys
-// func Verify(cli *goutils.CLI, printFailuresToStdOut bool) bool {
+// func Verify(cli *cli.CLI, printFailuresToStdOut bool) bool {
 // 	overallValid := true
 
 // 	keyFilename := cli.GetFileExistsOrDie("-key")
