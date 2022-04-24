@@ -23,6 +23,7 @@ import (
 	b64 "encoding/base64"
 	"io/ioutil"
 
+	cli "github.com/simonski/cli"
 	goutils "github.com/simonski/goutils"
 	"golang.org/x/crypto/bcrypt"
 
@@ -509,7 +510,7 @@ func DecryptWithPrivateKey(ciphertext []byte, priv *rsa.PrivateKey) []byte {
 
 // DoVerify performs verification of ~/.KPfile, encryption/decryption using
 // specified keys
-func Verify(cli *goutils.CLI, printFailuresToStdOut bool) bool {
+func Verify(cli *cli.CLI, printFailuresToStdOut bool) bool {
 	overallValid := true
 
 	keyFilename := cli.GetFileExistsOrDie("-key")

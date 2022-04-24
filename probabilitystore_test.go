@@ -3,12 +3,14 @@ package goutils
 import (
 	"fmt"
 	"testing"
+
+	cli "github.com/simonski/cli"
 )
 
 // createProbabilityStore helper method gives me a populated store I can
 // run tests on
 func createProbabilityStore(line string) *ProbabilityStore {
-	c := createCLI("")
+	c := cli.NewFromString("")
 	values := c.SplitStringToFloats(line, ",")
 	store := NewProbabilityStore(values)
 	return store

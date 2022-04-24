@@ -6,6 +6,7 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20210224194228-fe8f1750fd46 // indirect
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/shirou/gopsutil v3.21.5+incompatible
+	github.com/simonski/cli v0.0.0-20220424103850-940a314dd7f0
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.6 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
