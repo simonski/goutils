@@ -2,6 +2,7 @@ package semver
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -11,6 +12,10 @@ type SemVer struct {
 	Major     int
 	Minor     int
 	Increment int
+}
+
+func (v *SemVer) String() string {
+	return fmt.Sprintf("%v.%v.%v", v.Major, v.Minor, v.Increment)
 }
 
 func New(value string) (*SemVer, error) {

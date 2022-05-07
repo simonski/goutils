@@ -22,7 +22,7 @@ clean:
 	
 build: clean test
 	go fmt
-	go build
+	go build ./...
 	
 test: 
 	go test ./...
