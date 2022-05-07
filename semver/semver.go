@@ -15,6 +15,7 @@ type SemVer struct {
 }
 
 func (v *SemVer) String() string {
+
 	return fmt.Sprintf("%v.%v.%v", v.Major, v.Minor, v.Increment)
 }
 
