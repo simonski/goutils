@@ -55,3 +55,11 @@ func Test_SemVerLt(t *testing.T) {
 		t.Errorf("a should lt b\n")
 	}
 }
+
+func Test_SemVerGt2(t *testing.T) {
+	a, _ := New("1.0.4")
+	b, _ := New("1.0.10")
+	if a.Gt(b) {
+		t.Errorf("a should not be gt b\n")
+	}
+}

@@ -23,11 +23,37 @@ func (a *SemVer) Eq(b *SemVer) bool {
 }
 
 func (a *SemVer) Lt(b *SemVer) bool {
-	return a.Value < b.Value
+	if a.Major < b.Major {
+		return true
+	} else if a.Major < b.Major {
+		return false
+	}
+	if a.Minor < b.Minor {
+		return true
+	} else if a.Minor < b.Minor {
+		return false
+	}
+	if a.Increment < b.Increment {
+		return true
+	}
+	return false
 }
 
 func (a *SemVer) Gt(b *SemVer) bool {
-	return a.Value > b.Value
+	if a.Major > b.Major {
+		return true
+	} else if a.Major < b.Major {
+		return false
+	}
+	if a.Minor > b.Minor {
+		return true
+	} else if a.Minor < b.Minor {
+		return false
+	}
+	if a.Increment > b.Increment {
+		return true
+	}
+	return false
 }
 
 func New(value string) (*SemVer, error) {
