@@ -24,8 +24,8 @@ build: clean test
 	go fmt
 	go build
 	
-test:
-	go test
+test: 
+	go test ./...
 
 install:
 	go install
