@@ -31,3 +31,27 @@ func Test_SemVer(t *testing.T) {
 		t.Errorf("Shoud have failed parsing: %v", err.Error())
 	}
 }
+
+func Test_SemVerEq(t *testing.T) {
+	a, _ := New("1.0.0")
+	b, _ := New("1.0.0")
+	if !a.Eq(b) {
+		t.Errorf("a should eq b\n")
+	}
+}
+
+func Test_SemVerGt(t *testing.T) {
+	a, _ := New("1.0.1")
+	b, _ := New("1.0.0")
+	if !a.Gt(b) {
+		t.Errorf("a should gt b\n")
+	}
+}
+
+func Test_SemVerLt(t *testing.T) {
+	a, _ := New("1.0.0")
+	b, _ := New("1.0.1")
+	if !a.Lt(b) {
+		t.Errorf("a should lt b\n")
+	}
+}

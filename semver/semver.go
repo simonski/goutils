@@ -15,8 +15,19 @@ type SemVer struct {
 }
 
 func (v *SemVer) String() string {
-
 	return fmt.Sprintf("%v.%v.%v", v.Major, v.Minor, v.Increment)
+}
+
+func (a *SemVer) Eq(b *SemVer) bool {
+	return a.Major == b.Major && a.Minor == b.Minor && a.Increment == b.Increment
+}
+
+func (a *SemVer) Lt(b *SemVer) bool {
+	return a.Value < b.Value
+}
+
+func (a *SemVer) Gt(b *SemVer) bool {
+	return a.Value > b.Value
 }
 
 func New(value string) (*SemVer, error) {
