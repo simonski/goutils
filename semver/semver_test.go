@@ -14,7 +14,7 @@ func Test_SemVerGood(t *testing.T) {
 		t.Errorf("Major should be 1")
 	}
 	if sv.Minor != 2 {
-		t.Errorf("Minro should be 1")
+		t.Errorf("Minor should be 1")
 	}
 	if sv.Increment != 3 {
 		t.Errorf("Increment should be 3")
