@@ -196,10 +196,7 @@ func Intify(value string) int {
 
 func Isint(value string) bool {
 	_, err := strconv.Atoi(value)
-	if err != nil {
-		return false
-	}
-	return true
+	return err == nil
 }
 
 func Bitwisenot(value int) int {

@@ -21,7 +21,7 @@ func (m *Counter) Get(key string, defaultValue int) int {
 
 func (m *Counter) Keys() []string {
 	klist := make([]string, 0)
-	for k, _ := range m.Data {
+	for k := range m.Data {
 		klist = append(klist, k)
 	}
 	return klist

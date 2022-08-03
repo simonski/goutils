@@ -22,7 +22,6 @@ import (
 	"crypto/rsa"
 	b64 "encoding/base64"
 	"errors"
-	"io/ioutil"
 
 	cli "github.com/simonski/cli"
 	goutils "github.com/simonski/goutils"
@@ -33,7 +32,6 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -71,7 +69,7 @@ func Decrypt(value string, privateKeyFilename string) (string, error) {
 // // LoadPublicKey loads the filename to a *rsa.PublicKey
 // func LoadPublicKey(filename string) *rsa.PublicKey {
 // 	f := goutils.EvaluateFilename(filename)
-// 	bytes, err := ioutil.ReadFile(f)
+// 	bytes, err := os.ReadFile(f)
 // 	if err != nil {
 // 		panic(err)
 // 	}
@@ -182,7 +180,7 @@ func Decrypt(value string, privateKeyFilename string) (string, error) {
 // // LoadPublicKey loads the filename to a *rsa.PublicKey
 // func LoadPublicFromPrivateKey(filename string) (*rsa.PublicKey, error) {
 // 	f := goutils.EvaluateFilename(filename)
-// 	bytes, err := ioutil.ReadFile(f)
+// 	bytes, err := os.ReadFile(f)
 // 	if err != nil {
 // 		return nil, err
 // 	}
@@ -376,7 +374,7 @@ func DecryptWithPrivateKeyFilename(value string, privateKeyFilename string) (str
 // LoadPrivateKey loads the filename to a *rsa.PrivateKey
 func LoadPrivateKey(filename string) (*rsa.PrivateKey, error) {
 	f := goutils.EvaluateFilename(filename)
-	bytes, err := ioutil.ReadFile(f)
+	bytes, err := os.ReadFile(f)
 	if err != nil {
 		return nil, err
 	}
@@ -396,7 +394,7 @@ func LoadPrivateKey(filename string) (*rsa.PrivateKey, error) {
 // LoadPublicKey loads the filename to a *rsa.PublicKey
 func LoadPublicKey(filename string) (*rsa.PublicKey, error) {
 	f := goutils.EvaluateFilename(filename)
-	bytes, err := ioutil.ReadFile(f)
+	bytes, err := os.ReadFile(f)
 	if err != nil {
 		return nil, err
 	}
@@ -406,7 +404,7 @@ func LoadPublicKey(filename string) (*rsa.PublicKey, error) {
 // LoadPublicKey loads the filename to a *rsa.PublicKey
 func LoadPublicFromPrivateKey(filename string) (*rsa.PublicKey, error) {
 	f := goutils.EvaluateFilename(filename)
-	bytes, err := ioutil.ReadFile(f)
+	bytes, err := os.ReadFile(f)
 	if err != nil {
 		return nil, err
 	}
@@ -423,23 +421,23 @@ func LoadPublicFromPrivateKey(filename string) (*rsa.PublicKey, error) {
 func BytesToPrivateKey(priv []byte) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode(priv)
 	if block == nil {
-		return nil, errors.New("Error, block is nill.")
+		return nil, errors.New("block is nill")
 	}
 	// fmt.Println(block)
 	// fmt.Println(block.Headers)
 	// fmt.Printf("block.Type=%v\n", block.Type)
-	enc := x509.IsEncryptedPEMBlock(block)
+	// enc := x509.IsEncryptedPEMBlock(block)
 	b := block.Bytes
 	var err error
-	if enc {
-		// fmt.Println("is encrypted pem block")
-		b, err = x509.DecryptPEMBlock(block, nil)
-		if err != nil {
-			return nil, err //panic(err) //log.Error(err)
-		}
-		// } else {
-		// 	fmt.Println("is not encrypted pem block")
-	}
+	// if enc {
+	// 	// fmt.Println("is encrypted pem block")
+	// 	b, err = x509.DecryptPEMBlock(block, nil)
+	// 	if err != nil {
+	// 		return nil, err //panic(err) //log.Error(err)
+	// 	}
+	// 	// } else {
+	// 	// 	fmt.Println("is not encrypted pem block")
+	// }
 
 	// _, err := x509.ParsePKCS1PrivateKey(b)
 	// // fmt.Println(block.Type)
@@ -461,14 +459,14 @@ func BytesToPrivateKey(priv []byte) (*rsa.PrivateKey, error) {
 	if parsedKey, err = x509.ParsePKCS1PrivateKey(b); err != nil {
 		if parsedKey, err = x509.ParsePKCS8PrivateKey(b); err != nil {
 			return nil, err
-			fmt.Printf("neither 1 nor 8\n")
+			// fmt.Print("neither 1 nor 8\n")
 		}
 	}
 	var privateKey *rsa.PrivateKey
 	var ok bool
 	privateKey, ok = parsedKey.(*rsa.PrivateKey)
 	if !ok {
-		return nil, errors.New("Cannot ready private key.") //fmt.Printf("cannot\n")
+		return nil, errors.New("cannot ready private key")
 	}
 
 	// key, err := x509.ParsePKCS8PrivateKey(b)
@@ -486,18 +484,18 @@ func BytesToPublicKey(pub []byte) (*rsa.PublicKey, error) {
 	block, _ := pem.Decode(pub)
 	// fmt.Printf("BytesToPublicKey, pub=%v\n", pub)
 	if block == nil {
-		return nil, errors.New("Error, block is nill.")
+		return nil, errors.New("error, block is nill")
 	}
-	enc := x509.IsEncryptedPEMBlock(block)
+	// enc := x509.IsEncryptedPEMBlock(block)
 	b := block.Bytes
 	var err error
-	if enc {
-		log.Println("is encrypted pem block")
-		b, err = x509.DecryptPEMBlock(block, nil)
-		if err != nil {
-			return nil, err
-		}
-	}
+	// if enc {
+	// 	log.Println("is encrypted pem block")
+	// 	b, err = x509.DecryptPEMBlock(block, nil)
+	// 	if err != nil {
+	// 		return nil, err
+	// 	}
+	// }
 	ifc, err := x509.ParsePKCS1PublicKey(b)
 
 	// ifc, err := x509.ParsePKIXPublicKey(b)
@@ -605,7 +603,7 @@ func Verify(cli *cli.CLI, printFailuresToStdOut bool) bool {
 		if printFailuresToStdOut {
 			fmt.Printf("Verify : OK.\n")
 		}
-	} else {
+		// } else {
 		// fmt.Printf("kp verify: NOT OK.\n")
 	}
 
