@@ -23,7 +23,6 @@ func RPadToFixedLength(original string, padding string, maxLength int) string {
 	return RPad(original, padding, times)
 }
 
-//
 func TokenswitchEnvironmentVariables(original string) string {
 	home, _ := os.UserHomeDir()
 	new_string := strings.ReplaceAll(original, "~", home)

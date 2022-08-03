@@ -18,10 +18,9 @@ func (b *Mask) Get(index int) string {
 // DeriveNewMask applies this mask onto a value resulting in a new mask value
 // a new mask and an int[] of the bit indexes changed in the new mask
 
-//
-//address: 000000000000000000000000000000101010  (decimal 42)
-//mask:    000000000000000000000000000000X1001X
-//result:  000000000000000000000000000000X1101X
+// address: 000000000000000000000000000000101010  (decimal 42)
+// mask:    000000000000000000000000000000X1001X
+// result:  000000000000000000000000000000X1101X
 func (m *Mask) DeriveNewMask(address string) *Mask {
 	// changedBits := make([]int, 0)
 	newMaskValue := ""

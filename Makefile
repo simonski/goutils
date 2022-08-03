@@ -17,10 +17,13 @@ usage:
 	@echo "  all                   - all of the above"
 	@echo ""
 
+setup:
+	go install honnef.co/go/tools/cmd/staticcheck@latest
+
 clean:
 	go clean
 	
-build: clean test
+build: clean test format
 	go fmt
 	go build ./...
 	
@@ -35,3 +38,7 @@ run:
 
 all: clean build test
 	go install
+
+format:
+	staticcheck ./...
+	go fmt ./...
