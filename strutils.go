@@ -15,12 +15,18 @@ func RPad(original string, padding string, repeat int) string {
 
 func LPadToFixedLength(original string, padding string, maxLength int) string {
 	times := maxLength - len(original)
-	return LPad(original, padding, times)
+	if times > 0 {
+		return LPad(original, padding, times)
+	}
+	return original
 }
 
 func RPadToFixedLength(original string, padding string, maxLength int) string {
 	times := maxLength - len(original)
-	return RPad(original, padding, times)
+	if times > 0 {
+		return RPad(original, padding, times)
+	}
+	return original
 }
 
 func TokenswitchEnvironmentVariables(original string) string {
