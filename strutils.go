@@ -40,3 +40,10 @@ func TokenswitchEnvironmentVariables(original string) string {
 	}
 	return new_string
 }
+
+func StripWhitespace(line string) string {
+	line = strings.ReplaceAll(line, " ", "")
+	line = strings.ReplaceAll(line, "\t", "")
+	line = strings.ReplaceAll(line, "\n", "")
+	return line
+}

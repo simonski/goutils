@@ -212,3 +212,58 @@ func Repeatstring(s string, times int) string {
 	}
 	return out
 }
+
+func Abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
+
+func Min64(a int64, b int64) int64 {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func Max64(a int64, b int64) int64 {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func MinU64(a uint64, b uint64) uint64 {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func MaxU64(a uint64, b uint64) uint64 {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func Factorial(a uint64) uint64 {
+	if a > 1 {
+		a = a * Factorial(a-1)
+		return a
+	} else {
+		return a
+	}
+}
+
+// https://en.wikipedia.org/wiki/Arithmetic_progression
+// also: https://www.youtube.com/watch?v=uACt9OntiLo
+func ArithmeticProgression(first int, last int) int {
+
+	// number N terms being added (here, 5)
+	// multiplying the sum of the first and last number then divide by 2
+	//
+	return (last * (first + last)) / 2
+
+}
