@@ -19,10 +19,16 @@ func (v *SemVer) String() string {
 }
 
 func (a *SemVer) Eq(b *SemVer) bool {
+	if b == nil {
+		return false
+	}
 	return a.Major == b.Major && a.Minor == b.Minor && a.Increment == b.Increment
 }
 
 func (a *SemVer) Lt(b *SemVer) bool {
+	if b == nil {
+		return false
+	}
 	if a.Major < b.Major {
 		return true
 	} else if a.Major > b.Major {
@@ -40,6 +46,9 @@ func (a *SemVer) Lt(b *SemVer) bool {
 }
 
 func (a *SemVer) Gt(b *SemVer) bool {
+	if b == nil {
+		return false
+	}
 	if a.Major > b.Major {
 		return true
 	} else if a.Major < b.Major {
