@@ -172,14 +172,20 @@ func ReverseString(s string) string {
 
 // FileExists indicates if a file already exists... or not
 func FileExists(filename string) bool {
-	if _, err := os.Stat(filename); err == nil {
-		return true
-	} else if os.IsNotExist(err) {
-		return false
-	} else {
-		// makes no sense but..
+	result, err := os.Stat(filename)
+	if err != nil {
 		return false
 	}
+	return !result.IsDir()
+}
+
+// DirExists indicates if a file already exists... or not
+func DirExists(filename string) bool {
+	result, err := os.Stat(filename)
+	if err != nil {
+		return false
+	}
+	return result.IsDir()
 }
 
 // EvaluateFilename replaces ~ with os.Getenv("HOME") on the filename
